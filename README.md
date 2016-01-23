@@ -3,3 +3,6 @@ Este trabalho trata do problema das p-medianas. Nele foram implementadas três a
 
 Mais informações podem ser obtidas através da Wiki, neste link: 
     https://github.com/waglds/P-Medianas/wiki
+
+
+<a href="https://codeclimate.com/github/waglds/P-Medianas"><img src="https://codeclimate.com/github/waglds/P-Medianas/badges/gpa.svg" /></a>
