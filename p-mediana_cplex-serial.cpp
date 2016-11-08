@@ -42,14 +42,14 @@ int minDistance(int dist[], bool sptSet[]){
 
 int dijkstra(int graph[V][V], int src, int dst){
 
-	int dist[V];     
+	int dist[V];
 
-	bool sptSet[V]; 
+	bool sptSet[V];
 
 	for (int i = 0; i < V; i++){
-    
+
 		dist[i] = INT_MAX, sptSet[i] = false;
-	
+
 	}
 
 	dist[src] = 0;
@@ -63,14 +63,14 @@ int dijkstra(int graph[V][V], int src, int dst){
 		for (int v = 0; v < V; v++){
 
 			if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX
-            			&& dist[u]+graph[u][v] < dist[v]){
+					&& dist[u]+graph[u][v] < dist[v]){
 
 				dist[v] = dist[u] + graph[u][v];
 
 			}
 
 		}
-            
+
 	}
 
 	return dist[dst];
@@ -96,7 +96,7 @@ void pMediana(int graph[V][V], int p){
 	}
 
 	int melhorMediana = 0;
-	
+
 	for(int j = 0; j < p; j++){
 
 		melhorSolucao[j] = matrizSolucoes[0][j];
@@ -105,7 +105,7 @@ void pMediana(int graph[V][V], int p){
 
 	for(int i = 0; i < V; i++){
 
-		bool isParteSolucao = false;	
+		bool isParteSolucao = false;
 
 		for (int j = 0; j < MEDIANAS; j++){
 
@@ -142,13 +142,12 @@ void pMediana(int graph[V][V], int p){
 			}
 
 			melhorMediana = melhorMediana + menorValor;
-			
+
 		}
-		
+
 	}
 
 	for(int i = 1; i < Q_SOLUCOES; i++){
-
 
 		int solucaoAtual[p];
 
@@ -224,11 +223,10 @@ void pMediana(int graph[V][V], int p){
 		cout << melhorSolucao[l] << " ";
 
 	}
-	
+
 	cout << "]" << endl;
 
 }
-
 
 void carregarGrafo(){
 
@@ -237,28 +235,28 @@ void carregarGrafo(){
 
 	std::string str = "grafos/" + numGrafo.str();
 
-	const char* path = str.c_str(); 
+	const char* path = str.c_str();
 
 	FILE* arquivo = fopen(path, "r");
 
 	if (arquivo == NULL){
 
-        fprintf(stderr, "Arquivo do Grafo nao foi aberto!\n");
-        exit(1);
+		fprintf(stderr, "Arquivo do Grafo nao foi aberto!\n");
+		exit(1);
 
-    }
+	}
 
-    for (int i = 0; i < V; i++){
+	for (int i = 0; i < V; i++){
 
-        for (int j = 0; j < V; j++){
+		for (int j = 0; j < V; j++){
 
-            int a = 0;
-            fscanf(arquivo, "%d", &a);
-            matrizGrafo[i][j] = a;
+			int a = 0;
+			fscanf(arquivo, "%d", &a);
+			matrizGrafo[i][j] = a;
 
-        }
+		}
 
-    }
+	}
 
 }
 
@@ -271,7 +269,7 @@ void carregarSolucoes(){
 		for (int i = 0; i < (V - 1); i++){
 
 			for (int j = (i + 1); j < (V); j++){
-			
+
 				matrizSolucoes[num_matr][0] = i;
 				matrizSolucoes[num_matr][1] = j;
 
@@ -288,13 +286,13 @@ void carregarSolucoes(){
 		for (int i = 0; i < (V - 2); i++){
 
 			for (int j = (i + 1); j < (V - 1); j++){
-			
+
 				for (int k = (j + 1); k < (V); k++){
 
 					matrizSolucoes[num_matr][0]  = i;
 					matrizSolucoes[num_matr][1]  = j;
 					matrizSolucoes[num_matr][2]  = k;
-					
+
 					num_matr++;
 
 				}
@@ -310,7 +308,7 @@ void carregarSolucoes(){
 		for (int i = 0; i < (V - 4); i++){
 
 			for (int j = (i + 1); j < (V - 3); j++){
-			
+
 				for (int k = (j + 1); k < (V - 2); k++){
 
 					for (int l = (k + 1); l < (V - 1); l++){
@@ -319,11 +317,11 @@ void carregarSolucoes(){
 
 							matrizSolucoes[num_matr][0]  = i;
 							matrizSolucoes[num_matr][1]  = j;
-					        matrizSolucoes[num_matr][2]  = k;
-					        matrizSolucoes[num_matr][3]  = l;
-					        matrizSolucoes[num_matr][4]  = m;
+							matrizSolucoes[num_matr][2]  = k;
+							matrizSolucoes[num_matr][3]  = l;
+							matrizSolucoes[num_matr][4]  = m;
 
-					        num_matr++;
+							num_matr++;
 
 						}
 
@@ -347,25 +345,27 @@ int main(){
 
 	cout << "Carregando o Problema...\n" << endl;
 	carregarGrafo();
-    carregarSolucoes();
+	carregarSolucoes();
 
-    for(int i = 0; i < V; i++){
-		
+	for(int i = 0; i < V; i++){
+
 		for(int j = 0; j < V; j++){
-			
+
 			matrizDistancias[i][j] = dijkstra(matrizGrafo, i, j);
+
 		}
+
 	}
 
-    cout << "Resolvendo...\n" << endl;
-    pMediana(matrizGrafo, MEDIANAS);
+	cout << "Resolvendo...\n" << endl;
+	pMediana(matrizGrafo, MEDIANAS);
 
-    int melhorS = INT_MAX;
+	int melhorS = INT_MAX;
 	int indexMelhor = 0;
 
 	cout << "\nFim." << endl;
-    
-    return 0;
+
+	return 0;
 
 }
 
